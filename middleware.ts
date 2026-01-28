@@ -7,7 +7,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Middleware jalan di semua halaman KECUALI file statis (gambar, favicon, dll)
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
