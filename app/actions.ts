@@ -416,3 +416,71 @@ export async function signInAction(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/dashboard");
 }
+
+// --- Pricelist / Services ---
+export async function createServiceAction(formData: {
+  name: string;
+  price: number;
+  category: string;
+  icon: string;
+}) {
+  const supabase = await createClient();
+  const {
+    data: {user},
+  } = await supabase.auth.getUser();
+
+  if (!user) return {error: "User not authenticated"}; // Tambahkan proteksi ini
+
+  const {data, error} = await supabase.from("pricelist_items").insert([
+    {
+      ...formData,
+      user_id: user.id,
+    },
+  ]);
+
+  if (error) return {error: error.message};
+
+  // Tambahkan revalidate agar halaman pricelist langsung update
+  revalidatePath("/dashboard/pricelist");
+  revalidatePath("/dashboard/pricelist/manage");
+
+  return {data};
+}
+
+export async function deleteServiceAction(id: string) {
+  const supabase = await createClient();
+  const {error} = await supabase.from("pricelist_items").delete().eq("id", id);
+  if (error) return {error: error.message};
+  return {success: true};
+}
+
+// --- GET ALL SERVICES (PRICELIST) ---
+export async function getServicesAction() {
+  const supabase = await createClient();
+  const {
+    data: {user},
+  } = await supabase.auth.getUser();
+
+  if (!user) return {data: []};
+
+  const {data, error} = await supabase
+    .from("pricelist_items")
+    .select("*")
+    .eq("user_id", user.id) // Filter agar hanya muncul milik Bagian Corps
+    .order("created_at", {ascending: false});
+
+  if (error) return {error: error.message};
+  return {data: data || []};
+}
+
+export async function updateServiceAction(id: string, formData: { name: string; price: number; category: string; icon: string }) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("pricelist_items")
+    .update(formData)
+    .eq("id", id);
+
+  if (error) return { error: error.message };
+  revalidatePath("/dashboard/pricelist");
+  return { success: true };
+}

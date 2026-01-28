@@ -9,6 +9,8 @@ import {
   LogOut,
   Briefcase,
   Users,
+  Search,
+  Tag,
 } from "lucide-react";
 
 export function SidebarNav() {
@@ -44,6 +46,11 @@ export function SidebarNav() {
       href: "/dashboard/customers",
       label: "Customers",
       icon: Users,
+    },
+    {
+      href: "/dashboard/pricelist",
+      label: "Pricelist",
+      icon: Tag,
     },
   ];
 
@@ -94,7 +101,7 @@ export function SettingsNav() {
         Settings
       </p>
       <Link
-        href="/settings"
+        href="/dashboard/settings"
         className={`flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all group ${
           isActive("/settings")
             ? "text-black bg-[#B6F09C] shadow-[0_0_15px_rgba(182,240,156,0.3)]"

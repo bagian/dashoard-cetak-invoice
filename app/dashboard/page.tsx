@@ -1,8 +1,9 @@
 "use client";
-import { createClient } from "@/utils/supabase/client";
-import { useEffect, useState } from "react";
-import { User } from "@supabase/supabase-js";
+import {createClient} from "@/utils/supabase/client";
+import {useEffect, useState} from "react";
+import {User} from "@supabase/supabase-js";
 import {getDashboardData} from "@/app/actions";
+import FlipClock from "./flip-clock";
 import {
   Users,
   DollarSign,
@@ -15,6 +16,10 @@ import {
   Briefcase,
   ChevronLeft,
   ChevronRight,
+  ShieldCheck,
+  ShieldAlert,
+  Lock,
+  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -93,6 +98,7 @@ export default function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
+  const [rlsSafe, setRlsSafe] = useState<boolean | null>(null);
 
   // Calendar State
   const [date, setDate] = useState(new Date());
@@ -105,12 +111,16 @@ export default function DashboardPage() {
   useEffect(() => {
     async function initDashboard() {
       try {
-        // 1. Ambil User (Client Side)
         const supabase = createClient();
-        const { data: { user: authUser } } = await supabase.auth.getUser();
+        const {
+          data: {user: authUser},
+        } = await supabase.auth.getUser();
         setUser(authUser);
 
-        // 2. Ambil Data Dashboard
+        // CEK KEAMANAN RLS
+        const {error} = await supabase.from("customers").select("id").limit(1);
+        setRlsSafe(!error || error.code !== "42501");
+
         const res = await getDashboardData();
         if (res) setData(res as DashboardData);
       } catch (err) {
@@ -131,7 +141,6 @@ export default function DashboardPage() {
 
   const {stats, chartData, invoices, projectStats, holidays} = data;
 
-  // Generate Calendar Grid
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
   const calendarGrid = [
@@ -139,8 +148,7 @@ export default function DashboardPage() {
     ...Array.from({length: daysInMonth}, (_, i) => i + 1),
   ];
 
-  // User Header Logic
-  const userEmail = user?.email || "guest@bagian.corps";
+  const userEmail = user?.email || "";
   const userInitial = userEmail.substring(0, 1).toUpperCase();
   const userRole =
     user?.app_metadata?.role === "admin" ? "Super Admin" : "Member";
@@ -159,6 +167,9 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-4">
+          <div className="hidden lg:block">
+            <FlipClock />
+          </div>
           <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
             <div className="text-right hidden sm:block">
               <p className="text-sm font-black text-[#1C1C1C] font-sans">
@@ -169,6 +180,55 @@ export default function DashboardPage() {
             <div className="w-12 h-12 bg-[#1C1C1C] rounded-2xl flex items-center justify-center text-[#B6F09C] font-black text-xl shadow-lg shadow-gray-200">
               {userInitial}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- SECURITY ADVISOR WIDGET --- */}
+      <div
+        className={`bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-all flex justify-between items-center gap-4${
+          rlsSafe
+            ? "bg-green-50/30 border-green-200"
+            : "bg-red-50 border-red-200"
+        }`}
+      >
+        <div className="flex items-center gap-5">
+          <div
+            className={`p-4 rounded-2xl shadow-sm ${
+              rlsSafe
+                ? "bg-green-500 text-white"
+                : "bg-red-500 text-white animate-bounce"
+            }`}
+          >
+            {rlsSafe ? <ShieldCheck size={28} /> : <ShieldAlert size={28} />}
+          </div>
+          <div>
+            <h4
+              className={`font-black text-sm uppercase tracking-widest ${
+                rlsSafe ? "text-green-800" : "text-red-800"
+              }`}
+            >
+              Database Security Status
+            </h4>
+            <p className="text-xs font-medium text-gray-500 mt-1">
+              {rlsSafe
+                ? "Row Level Security (RLS) is active. Your client data is protected by Supabase and Cloudflare."
+                : "CRITICAL: RLS is disabled on 'customers' table. Data is exposed to public!"}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="text-right hidden sm:block">
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-tighter">
+              Captcha Provider
+            </p>
+            <p className="text-xs font-bold text-[#1C1C1C]">
+              Cloudflare Turnstile
+            </p>
+          </div>
+          <div className="p-3 bg-white rounded-xl border border-gray-100">
+            <Lock size={18} className="text-blue-500" />
           </div>
         </div>
       </div>

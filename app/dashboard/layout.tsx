@@ -75,7 +75,7 @@ export default async function DashboardLayout({
           <SettingsNav />
 
           <form action="/auth/signout" method="post" className="mt-4">
-            <button className="flex items-center gap-3 px-4 py-3 w-full text-left text-red-500 hover:bg-red-500/10 rounded-xl font-medium transition-all text-sm">
+            <button className="flex items-center gap-3 px-4 py-3 w-full text-left text-red-500 hover:bg-red-500/10 rounded-xl font-medium transition-all text-sm cursor-pointer">
               <LogOut size={18} /> Log Out
             </button>
           </form>
