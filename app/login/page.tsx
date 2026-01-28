@@ -12,16 +12,32 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
+import {Turnstile} from "@marsidev/react-turnstile"; // Import Library
 
 export default function LoginPage() {
   const {showToast} = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null); // State simpan token
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Validasi: Jika captcha belum diisi, jangan kirim data
+    if (!captchaToken) {
+      showToast(
+        "Tolong selesaikan verifikasi Captcha terlebih dahulu.",
+        "error",
+      );
+      return;
+    }
+
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+
+    // Tambahkan token captcha ke formData agar bisa dibaca di Server Action
+    formData.append("captchaToken", captchaToken);
+
     const result = await signInAction(formData);
 
     if (result?.error) {
@@ -97,6 +113,18 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {/* --- CLOUDFLARE TURNSTILE WIDGET --- */}
+            <div className="flex justify-center">
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
+                onSuccess={(token) => setCaptchaToken(token)}
+                options={{
+                  theme: "light",
+                  size: "normal",
+                }}
+              />
+            </div>
+
             {/* Submit Button */}
             <div className="pt-2">
               <button
@@ -116,7 +144,7 @@ export default function LoginPage() {
             </div>
           </form>
 
-          {/* Footer Card - Info Admin */}
+          {/* Footer Card */}
           <div className="mt-10 pt-8 border-t border-gray-50 text-center">
             <div className="flex items-center justify-center gap-2 text-gray-400 mb-2">
               <ShieldCheck size={14} />
@@ -130,7 +158,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Support Text */}
         <p className="mt-8 text-center text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">
           Secure Login • Bagian Corps v1.0
         </p>

@@ -404,12 +404,20 @@ export async function signInAction(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
+  // 1. Ambil token captcha yang tadi kita append di LoginPage
+  const captchaToken = formData.get("captchaToken") as string;
+
+  // 2. Kirim email, password, DAN token captcha ke Supabase
   const {error} = await supabase.auth.signInWithPassword({
     email,
     password,
+    options: {
+      captchaToken, // INI WAJIB ADA!
+    },
   });
 
   if (error) {
+    // Kalau error karena captcha, biasanya pesannya "captcha verification process failed"
     return {error: error.message};
   }
 
@@ -473,14 +481,17 @@ export async function getServicesAction() {
   return {data: data || []};
 }
 
-export async function updateServiceAction(id: string, formData: { name: string; price: number; category: string; icon: string }) {
+export async function updateServiceAction(
+  id: string,
+  formData: {name: string; price: number; category: string; icon: string},
+) {
   const supabase = await createClient();
-  const { error } = await supabase
+  const {error} = await supabase
     .from("pricelist_items")
     .update(formData)
     .eq("id", id);
 
-  if (error) return { error: error.message };
+  if (error) return {error: error.message};
   revalidatePath("/dashboard/pricelist");
-  return { success: true };
+  return {success: true};
 }
