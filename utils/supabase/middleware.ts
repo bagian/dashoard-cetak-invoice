@@ -15,6 +15,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
+          // Perbaikan: Loop cookies ke request DAN response secara sinkron
           cookiesToSet.forEach(({name, value, options}) =>
             request.cookies.set(name, value),
           );
@@ -29,17 +30,22 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  // Cek status user sekarang
+  // Verifikasi user (Sangat penting untuk keamanan Bagian Corps)
   const {
     data: {user},
   } = await supabase.auth.getUser();
 
-  // --- PROTEKSI HALAMAN ---
-  // Kalau User BELUM Login, tapi nekat mau masuk ke dashboard...
+  // Proteksi Halaman Dashboard
   if (!user && request.nextUrl.pathname.startsWith("/dashboard")) {
-    // ...Tendang balik ke halaman login
     const url = request.nextUrl.clone();
     url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Jika user sudah login, jangan biarkan mereka balik ke /login
+  if (user && request.nextUrl.pathname.startsWith("/login")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
