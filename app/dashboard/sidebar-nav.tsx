@@ -56,7 +56,7 @@ export function SidebarNav() {
 
   return (
     <nav className="space-y-4">
-      <p className="px-4 text-[10px] font-bold text-gray-600 mb-4 uppercase tracking-widest">
+      <p className="px-4 text-[12px] font-bold text-gray-600 mb-4 uppercase tracking-widest">
         Main Menu
       </p>
 
@@ -68,7 +68,7 @@ export function SidebarNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all group ${
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-xl md:font-medium text-sm transition-all group ${
               active
                 ? "text-black bg-[#B6F09C] shadow-[0_0_15px_rgba(182,240,156,0.3)]"
                 : "text-gray-400 hover:text-white hover:bg-[#1F1F1F]"

@@ -154,31 +154,34 @@ export default function DashboardPage() {
     user?.app_metadata?.role === "admin" ? "Super Admin" : "Member";
 
   return (
-    <div className="max-w-[1600px] mx-auto space-y-8 animate-in fade-in duration-500 pb-10">
+    <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 pb-10">
       {/* HEADER */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8 animate-in fade-in duration-700">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 animate-in fade-in duration-700">
         <div>
-          <h1 className="text-3xl font-black text-[#1C1C1C] tracking-tight font-sans">
+          <h1 className="sm:text-3xl text-2xl font-black text-[#1C1C1C] tracking-tight font-sans">
             Hello, {user?.user_metadata?.full_name || "Bagian Corps"}! 👋
           </h1>
           <p className="text-gray-500 mt-2 text-sm font-medium">
             Here&apos;s your overview of your business today.
           </p>
         </div>
-
-        <div className="flex items-center gap-4">
-          <div className="hidden lg:block">
+        <div className="items-center gap-4 hidden sm:flex">
+          <div className=" lg:block">
             <FlipClock />
           </div>
-          <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
-            <div className="text-right hidden sm:block">
-              <p className="text-sm font-black text-[#1C1C1C] font-sans">
-                {userRole}
-              </p>
-              <p className="text-[11px] font-bold text-gray-400">{userEmail}</p>
-            </div>
-            <div className="w-12 h-12 bg-[#1C1C1C] rounded-2xl flex items-center justify-center text-[#B6F09C] font-black text-xl shadow-lg shadow-gray-200">
-              {userInitial}
+          <div className="gap-3 pl-4 sm:border-l border-gray-200 hidden lg:block">
+            <div className="flex items-center gap-4">
+              <div className="text-right sm:block">
+                <p className="text-sm font-black text-[#1C1C1C] font-sans">
+                  {userRole}
+                </p>
+                <p className="text-[11px] font-bold text-gray-400">
+                  {userEmail}
+                </p>
+              </div>
+              <div className="w-12 h-12 bg-[#1C1C1C] rounded-2xl flex items-center justify-center text-[#B6F09C] font-black text-xl shadow-lg shadow-gray-200">
+                {userInitial}
+              </div>
             </div>
           </div>
         </div>
@@ -192,7 +195,7 @@ export default function DashboardPage() {
             : "bg-red-50 border-red-200"
         }`}
       >
-        <div className="flex items-center gap-5">
+        <div className="flex items-start sm:items-center gap-5">
           <div
             className={`p-4 rounded-2xl shadow-sm ${
               rlsSafe
@@ -210,7 +213,7 @@ export default function DashboardPage() {
             >
               Database Security Status
             </h4>
-            <p className="text-xs font-medium text-gray-500 mt-1">
+            <p className="text-xs font-medium text-gray-500 mt-1 max-w-[45vw]">
               {rlsSafe
                 ? "Row Level Security (RLS) is active. Your client data is protected by Supabase and Cloudflare."
                 : "CRITICAL: RLS is disabled on 'customers' table. Data is exposed to public!"}
@@ -227,7 +230,7 @@ export default function DashboardPage() {
               Cloudflare Turnstile
             </p>
           </div>
-          <div className="p-3 bg-white rounded-xl border border-gray-100">
+          <div className="p-3 bg-white rounded-xl border border-gray-100 hidden sm:block">
             <Lock size={18} className="text-blue-500" />
           </div>
         </div>
