@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import {useState, useRef} from "react";
 import {signInAction} from "@/app/actions";
 import {useToast} from "@/components/providers/toast-provider";
 import {
@@ -12,12 +12,13 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Link from "next/link";
-import {Turnstile} from "@marsidev/react-turnstile"; // Import Library
+import {Turnstile, type TurnstileInstance} from "@marsidev/react-turnstile"; // Import Library
 
 export default function LoginPage() {
   const {showToast} = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null); // State simpan token
+  const turnstileRef = useRef<TurnstileInstance>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,16 +30,18 @@ export default function LoginPage() {
 
     setIsLoading(true);
     const formData = new FormData(e.currentTarget);
-
-    // INI BAGIAN PALING PENTING: Token harus di-append ke formData
     formData.append("captchaToken", captchaToken);
 
     const result = await signInAction(formData);
 
+    // LOGIKA ERROR PINDAH KE SINI (CLIENT SIDE)
     if (result?.error) {
       showToast(result.error, "error");
       setIsLoading(false);
-      // Jika gagal, reset Turnstile agar user bisa coba lagi
+
+      // Reset state captcha dan widget Turnstile biar user bisa coba lagi
+      setCaptchaToken(null);
+      turnstileRef.current?.reset();
     }
   }
 
@@ -112,8 +115,20 @@ export default function LoginPage() {
             {/* --- CLOUDFLARE TURNSTILE WIDGET --- */}
             <div className="flex justify-center">
               <Turnstile
+                ref={turnstileRef}
                 siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
-                onSuccess={(token) => setCaptchaToken(token)}
+                onSuccess={(token) => {
+                  console.log("✅ Turnstile token:", token);
+                  setCaptchaToken(token);
+                }}
+                onExpire={() => {
+                  console.log("⚠️ Turnstile expired");
+                  setCaptchaToken(null);
+                }}
+                onError={() => {
+                  console.log("❌ Turnstile error");
+                  setCaptchaToken(null);
+                }}
                 options={{
                   theme: "light",
                   size: "normal",

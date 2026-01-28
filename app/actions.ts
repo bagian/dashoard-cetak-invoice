@@ -403,16 +403,12 @@ export async function signInAction(formData: FormData) {
   const supabase = await createClient();
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-
-  // Ambil token yang tadi di-append di client
   const captchaToken = formData.get("captchaToken") as string;
 
   const {error} = await supabase.auth.signInWithPassword({
     email,
     password,
-    options: {
-      captchaToken: captchaToken, // Harus dikirim ke Supabase
-    },
+    options: {captchaToken},
   });
 
   if (error) return {error: error.message};
