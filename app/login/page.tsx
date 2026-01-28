@@ -22,20 +22,15 @@ export default function LoginPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Validasi: Jika captcha belum diisi, jangan kirim data
     if (!captchaToken) {
-      showToast(
-        "Tolong selesaikan verifikasi Captcha terlebih dahulu.",
-        "error",
-      );
+      showToast("Tolong selesaikan verifikasi Captcha.", "error");
       return;
     }
 
     setIsLoading(true);
-
     const formData = new FormData(e.currentTarget);
 
-    // Tambahkan token captcha ke formData agar bisa dibaca di Server Action
+    // INI BAGIAN PALING PENTING: Token harus di-append ke formData
     formData.append("captchaToken", captchaToken);
 
     const result = await signInAction(formData);
@@ -43,6 +38,7 @@ export default function LoginPage() {
     if (result?.error) {
       showToast(result.error, "error");
       setIsLoading(false);
+      // Jika gagal, reset Turnstile agar user bisa coba lagi
     }
   }
 

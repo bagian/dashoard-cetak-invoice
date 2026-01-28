@@ -404,22 +404,18 @@ export async function signInAction(formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
-  // 1. Ambil token captcha yang tadi kita append di LoginPage
+  // Ambil token yang tadi di-append di client
   const captchaToken = formData.get("captchaToken") as string;
 
-  // 2. Kirim email, password, DAN token captcha ke Supabase
   const {error} = await supabase.auth.signInWithPassword({
     email,
     password,
     options: {
-      captchaToken, // INI WAJIB ADA!
+      captchaToken: captchaToken, // Harus dikirim ke Supabase
     },
   });
 
-  if (error) {
-    // Kalau error karena captcha, biasanya pesannya "captcha verification process failed"
-    return {error: error.message};
-  }
+  if (error) return {error: error.message};
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
