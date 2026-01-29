@@ -44,9 +44,8 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* --- SERVER STATUS INDICATOR (NEW) --- */}
-      {/* <div className="relative min-h-screen">
-        <div className="absolute bottom-4 left-4 md:left-auto md:right-8 flex items-center gap-3 bg-white/80 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-2xl border border-gray-100 shadow-sm z-50 animate-in fade-in slide-in-from-bottom-2 md:slide-in-from-right-4 duration-1000">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans relative">
+        <div className="absolute top-4 left-4 md:left-auto md:right-8 flex items-center gap-3 bg-white/80 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-2xl border border-gray-100 shadow-sm z-50 animate-in fade-in slide-in-from-bottom-2 md:slide-in-from-right-4 duration-1000">
           <div className="relative flex h-2 w-2">
             <span
               className={`animate-ping absolute inline-flex h-full w-full rounded-full ${serverStatus === "online" ? "bg-green-400" : "bg-red-400"} opacity-75`}
@@ -64,33 +63,13 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-      </div> */}
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 font-sans relative">
-        <div className="absolute bottom-4 left-4 md:left-auto md:right-8 flex items-center gap-3 bg-white/80 backdrop-blur-sm px-3 py-1.5 md:px-4 md:py-2 rounded-2xl border border-gray-100 shadow-sm z-50 animate-in fade-in slide-in-from-bottom-2 md:slide-in-from-right-4 duration-1000">
-          <div className="relative flex h-2 w-2">
-            <span
-              className={`animate-ping absolute inline-flex h-full w-full rounded-full ${serverStatus === "online" ? "bg-green-400" : "bg-red-400"} opacity-75`}
-            ></span>
-            <span
-              className={`relative inline-flex rounded-full h-1.5 w-1.5 md:h-2 md:w-2 ${serverStatus === "online" ? "bg-green-500" : "bg-red-500"}`}
-            ></span>
-          </div>
-          <div className="flex flex-col">
-            <p className="text-[8px] md:text-[10px] font-black text-gray-400 uppercase tracking-tighter leading-none mb-0.5">
-              Network
-            </p>
-            <p className="text-[9px] md:text-[11px] font-bold text-gray-700 leading-none uppercase">
-              Main Server: {serverStatus}
-            </p>
-          </div>
-        </div>
-        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700 pt-24">
           {/* Brand Section */}
           <div className="text-center mb-10">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-[#B6F09C] rounded-[28px] shadow-xl shadow-green-100 mb-6">
-              <LogIn size={36} className="text-green-900" />
+            <div className="inline-flex items-center justify-center w-18 h-18 bg-[#B6F09C] rounded-[28px] shadow-xl shadow-green-100 mb-6">
+              <LogIn size={26} className="text-green-900" />
             </div>
-            <h1 className="text-4xl font-black text-[#1C1C1C] tracking-tight">
+            <h1 className="text-2xl font-black text-[#1C1C1C] tracking-tight">
               Bagian Corps
             </h1>
             <p className="text-gray-500 font-medium mt-2">
@@ -99,7 +78,7 @@ export default function LoginPage() {
           </div>
 
           {/* Login Card */}
-          <div className="bg-white p-10 rounded-[40px] border border-gray-100 shadow-xl shadow-gray-200/50">
+          <div className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-xl shadow-gray-200/50">
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Email Field */}
               <div>
@@ -112,7 +91,7 @@ export default function LoginPage() {
                     type="email"
                     required
                     placeholder="name@bagiancorps.com"
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50 border-2 border-transparent outline-none focus:border-[#B6F09C] focus:bg-white text-gray-900 placeholder:text-gray-400 font-medium transition-all shadow-sm group-hover:bg-gray-100/50"
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50/10 border-2 border-transparent outline-none focus:border-[#B6F09C] focus:bg-white text-gray-900 placeholder:text-gray-400 font-medium transition-all shadow-sm group-hover:bg-gray-100/50"
                   />
                   <Mail
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#72ac57] transition-colors"
@@ -140,7 +119,7 @@ export default function LoginPage() {
                     type="password"
                     required
                     placeholder="••••••••"
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50 border-2 border-transparent outline-none focus:border-[#B6F09C] focus:bg-white text-gray-900 placeholder:text-gray-400 font-medium transition-all shadow-sm group-hover:bg-gray-100/50"
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50/10 border-2 border-transparent outline-none focus:border-[#B6F09C] focus:bg-white text-gray-900 placeholder:text-gray-400 font-medium transition-all shadow-sm group-hover:bg-gray-100/50"
                   />
                   <Lock
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#72ac57] transition-colors"
@@ -171,7 +150,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-5 bg-[#1C1C1C] hover:bg-black text-white text-lg font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl shadow-gray-200 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-[#1C1C1C] hover:bg-black text-white text-sm font-black rounded-2xl transition-all flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl shadow-gray-200 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <Loader2 className="animate-spin" size={24} />
