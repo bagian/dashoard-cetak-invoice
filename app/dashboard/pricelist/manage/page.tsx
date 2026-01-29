@@ -129,7 +129,7 @@ export default function ManageServicesPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 space-y-8 font-sans animate-in fade-in duration-500">
+    <div className="max-w-7xl mx-auto space-y-8 font-sans animate-in fade-in duration-500">
       <div className="flex sm:justify-between items-center gap-3">
         <Link
           href="/dashboard/pricelist"

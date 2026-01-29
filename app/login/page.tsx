@@ -150,19 +150,21 @@ export default function LoginPage() {
               </div>
 
               {/* --- CLOUDFLARE TURNSTILE WIDGET --- */}
-              {/* <div className="flex justify-center">
-              <Turnstile
-                ref={turnstileRef}
-                siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!}
-                onSuccess={(token) => setCaptchaToken(token)}
-                onExpire={() => setCaptchaToken(null)}
-                onError={() => setCaptchaToken(null)}
-                options={{
-                  theme: "light",
-                  size: "normal",
-                }}
-              />
-            </div> */}
+              <div className="flex justify-center">
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={
+                    process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY!
+                  }
+                  onSuccess={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken(null)}
+                  onError={() => setCaptchaToken(null)}
+                  options={{
+                    theme: "light",
+                    size: "normal",
+                  }}
+                />
+              </div>
 
               {/* Submit Button */}
               <div className="pt-2">
