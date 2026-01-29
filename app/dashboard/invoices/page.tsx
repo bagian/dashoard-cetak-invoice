@@ -11,18 +11,20 @@ export default async function InvoicesPage() {
     .order("created_at", {ascending: false});
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
+    <div className="sm:max-w-7xl mx-auto">
+      <div className="flex sm:flex-row flex-col justify-between mb-8 sm:items-center">
         <div>
           <h1 className="text-3xl font-bold text-[#1C1C1C]">Invoices</h1>
           <p className="text-gray-500">Kelola semua tagihan client.</p>
         </div>
         {/* TOMBOL CREATE INVOICE DISINI */}
+
         <Link
           href="/dashboard/invoices/create"
-          className="flex items-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95"
+          className="flex items-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95 justify-center my-3"
         >
-          <Plus size={18} /> Buat Invoice Baru
+          <Plus size={18} />
+          Buat Invoice Baru
         </Link>
       </div>
       {/* RENDER CLIENT COMPONENT UNTUK PAGINATION */}

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1c1c1c;
+  --background: #f5f6fa;
   --foreground: #ededed;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #f5f6fa;
     --foreground: #ededed;
   }
 }
@@ -81,7 +81,6 @@ input[type="date"] {
 input[type="date"]:focus {
   outline: none;
 }
-
 
 @layer utilities {
   /* Membuat pola garis-garis diagonal transparan */

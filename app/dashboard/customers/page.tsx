@@ -8,18 +8,17 @@ export default async function CustomersPage() {
 
   return (
     <div className="max-w-7xl mx-auto pb-10">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+      <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 mb-10 w-full">
         <div>
           <h1 className="text-3xl font-bold text-[#1C1C1C]">Customers</h1>
           <p className="text-gray-500">
             Kelola database klien {customers.length} orang.
           </p>
         </div>
-
-        <div className="flex items-center gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-3  md:w-auto">
           <Link
             href="/dashboard/customers/create"
-            className="flex items-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95"
+            className="flex sm:justify-start justify-center items-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95 w-full sm:w-fit"
           >
             <Plus size={18} /> Add Customer
           </Link>

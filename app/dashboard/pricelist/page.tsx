@@ -183,7 +183,7 @@ export default function PricelistPage() {
         </div>
         <Link
           href="/dashboard/pricelist/manage"
-          className="flex items-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95"
+          className="flex items-center sm:justify-start justify-center gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95 w-full sm:w-fit"
         >
           <Settings2 size={18} /> Manage Services
         </Link>

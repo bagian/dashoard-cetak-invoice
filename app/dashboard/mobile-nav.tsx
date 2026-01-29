@@ -31,7 +31,7 @@ export function MobileNav() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 right-6 z-[150] w-10 h-10 flex flex-col justify-center items-center focus:outline-none cursor-pointer"
+        className="lg:hidden fixed top-[1rem] right-[1.7rem] z-[150] w-10 h-10 flex flex-col justify-center items-center focus:outline-none cursor-pointer"
       >
         <div className="relative w-6 h-5">
           <span
@@ -56,14 +56,7 @@ export function MobileNav() {
         >
           <div className="p-6">
             <div className="flex items-center gap-3 mb-10  pt-2 border-b border-white/5 pb-6">
-              {/* <div className="w-8 h-8 bg-[#B6F09C] text-black rounded-lg flex items-center justify-center font-bold text-lg">
-                B
-              </div>
-              <h1 className="font-bold text-white text-xl tracking-wide">
-                Bagian Corps
-              </h1>
-            </div> */}
-              <div className="gap-3 border-gray-200 hidden sm:block">
+              <div className="gap-3 border-gray-200 sm:hidden">
                 <div className="flex items-center gap-2">
                   <div className="w-12 h-12 bg-[#B6F09C] rounded-2xl flex items-center justify-center text-black font-black text-2xl shadow-lg shadow-[0_0_15px_rgba(182,240,156,0.3)]">
                     {userInitial}

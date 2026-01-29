@@ -129,14 +129,15 @@ export default function ManageServicesPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4 space-y-8 font-sans animate-in fade-in duration-500">
-      <div className="flex justify-between items-center">
+    <div className="max-w-7xl mx-auto px-4 space-y-8 font-sans animate-in fade-in duration-500">
+      <div className="flex sm:justify-between items-center gap-3">
         <Link
           href="/dashboard/pricelist"
-          className="flex items-center gap-2 text-gray-500 hover:text-black font-bold transition-all"
+          className="flex items-center p-2 bg-white rounded-full border border-gray-200 hover:bg-gray-50 transition-colors"
         >
-          <ArrowLeft size={18} /> Kembali ke Kalkulator
+          <ArrowLeft size={20} className="text-gray-600" />
         </Link>
+        <span className="text-gray-500 font-bold">Kembali ke Kalkulator</span>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -166,7 +167,7 @@ export default function ManageServicesPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
                   Harga Layanan
@@ -222,7 +223,7 @@ export default function ManageServicesPage() {
               <label className="block text-sm font-bold text-gray-700 mb-2 ml-1">
                 Pilih Icon
               </label>
-              <div className="grid grid-cols-6 gap-2">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {ICON_OPTIONS.map((item) => (
                   <button
                     key={item.name}

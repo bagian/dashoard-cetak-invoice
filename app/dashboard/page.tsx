@@ -405,20 +405,20 @@ export default function DashboardPage() {
             <div className="flex gap-2">
               <button
                 onClick={prevMonth}
-                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition-all text-xs cursor-pointer"
+                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-[#1b3b0b] hover:bg-[#B6F09C] transition-all text-xs cursor-pointer"
               >
                 <ChevronLeft size={16} />
               </button>
               <button
                 onClick={nextMonth}
-                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition-all text-xs cursor-pointer"
+                className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-black hover:border-[#1b3b0b] hover:bg-[#B6F09C] transition-all text-xs cursor-pointer"
               >
                 <ChevronRight size={16} />
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-7 gap-y-4 text-center text-xs font-bold text-gray-400 mb-2">
+          <div className="grid grid-cols-7 gap-y-4 text-center text-xs font-bold text-gray-400 mb-8 border-b border-gray-200 pb-4">
             <span className="text-red-500">Min</span>
             <span>Sen</span>
             <span>Sel</span>
@@ -505,13 +505,13 @@ export default function DashboardPage() {
                   </div>
                   {/* Tooltip Libur */}
                   {holidayName && (
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap bg-red-500 text-white text-[10px] px-2 py-1 rounded shadow-lg z-10">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block whitespace-nowrap bg-red-500 text-white text-[13px] px-2 py-1 rounded shadow-lg z-10">
                       {holidayName}
                     </div>
                   )}
                   {/* Tooltip Invoice */}
                   {invoicesOnDay.length > 0 && (
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block w-56 bg-white border border-indigo-200 rounded-lg shadow-lg z-20 p-3">
+                    <div className="absolute bottom-full left-1/6 -translate-x-1/2 mb-1 hidden group-hover:block w-56 bg-white border border-indigo-200 rounded-lg shadow-lg z-20 p-3">
                       <div className="space-y-2">
                         {invoicesOnDay.map((inv) => (
                           <div
@@ -523,7 +523,7 @@ export default function DashboardPage() {
                                 <p className="font-bold text-gray-900">
                                   {inv.customer_name}
                                 </p>
-                                <p className="text-gray-600">
+                                <p className="text-gray-600 items-start flex">
                                   {formatRupiah(inv.total_amount)}
                                 </p>
                               </div>

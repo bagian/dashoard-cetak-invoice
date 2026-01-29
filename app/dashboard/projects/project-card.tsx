@@ -94,7 +94,7 @@ export default function ProjectCard({project}: {project: Project}) {
       className="group block relative"
     >
       <div
-        className={`bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm transition-all duration-300 relative h-full z-0 ${
+        className={`bg-white p-4 rounded-[24px] border border-gray-100 shadow-sm transition-all duration-300 relative h-full z-0 ${
           isMenuOpen
             ? "shadow-lg"
             : "hover:shadow-xl hover:-translate-y-1 cursor-pointer"
@@ -111,7 +111,7 @@ export default function ProjectCard({project}: {project: Project}) {
               {project.name ? project.name.substring(0, 2).toUpperCase() : "PR"}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-bold text-[#1C1C1C] truncate max-w-[150px]">
+              <h3 className="font-bold text-[#1C1C1C] truncate max-w-[110px] sm:max-w-[150px]">
                 {project.name}
               </h3>
               <p className="text-xs text-gray-500 truncate max-w-[150px]">
