@@ -63,7 +63,7 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700 pt-24">
+        <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-700">
           {/* Brand Section */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-18 h-18 bg-[#B6F09C] rounded-[28px] shadow-xl shadow-green-100 mb-6">
