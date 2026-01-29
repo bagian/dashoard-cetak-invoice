@@ -107,7 +107,7 @@ export default function CustomerCard({customer}: {customer: Customer}) {
           <div className="relative z-20">
             <button
               onClick={toggleMenu}
-              className="text-gray-300 hover:text-black transition-colors p-1 hover:bg-gray-100 rounded-full"
+              className="text-gray-300 hover:text-black transition-colors p-1 hover:bg-gray-100 rounded-full cursor-pointer"
             >
               {isMenuOpen ? <X size={20} /> : <MoreHorizontal size={20} />}
             </button>

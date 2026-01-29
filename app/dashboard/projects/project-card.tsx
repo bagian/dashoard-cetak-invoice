@@ -124,7 +124,7 @@ export default function ProjectCard({project}: {project: Project}) {
           <div className="relative z-20">
             <button
               onClick={toggleMenu}
-              className="text-gray-300 hover:text-black transition-colors p-1 hover:bg-gray-100 rounded-full"
+              className="text-gray-300 hover:text-black transition-colors p-1 hover:bg-gray-100 rounded-full cursor-pointer"
             >
               {isMenuOpen ? <X size={20} /> : <MoreHorizontal size={20} />}
             </button>
@@ -133,7 +133,7 @@ export default function ProjectCard({project}: {project: Project}) {
               <div className="absolute right-0 top-8 w-40 bg-white rounded-xl shadow-xl border border-gray-100 p-1.5 animate-in fade-in zoom-in-95 duration-200 z-50">
                 <button
                   onClick={handleDeleteClick}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors text-left"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors text-left cursor-pointer"
                 >
                   <Trash2 size={16} />
                   Hapus

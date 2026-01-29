@@ -43,7 +43,7 @@ export default async function CustomerProfilePage({params}: PageProps) {
   return (
     <div className="max-w-7xl mx-auto animate-in fade-in duration-500 font-sans">
       {/* Header Profile */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+      <div className="flex flex-col sm:flex-row justify-between items-start md:items-center gap-6 mb-12">
         <div className="flex items-center gap-5">
           <Link
             href="/dashboard/customers"
@@ -63,7 +63,7 @@ export default async function CustomerProfilePage({params}: PageProps) {
 
         <Link
           href={`/dashboard/customers/${customer.id}/edit`}
-          className="gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95"
+          className="gap-2 bg-[#1C1C1C] text-white px-5 py-2.5 rounded-xl font-bold hover:bg-[#B6F09C] hover:text-black transition-all shadow-lg active:scale-95 w-full sm:w-fit flex items-center justify-center"
         >
           Edit Profile
         </Link>

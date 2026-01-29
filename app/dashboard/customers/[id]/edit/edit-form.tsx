@@ -212,14 +212,14 @@ export default function EditCustomerForm({
           type="button"
           onClick={() => router.back()}
           disabled={isLoading}
-          className="flex-1 py-3 px-6 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all font-sans"
+          className="flex-1 py-3 px-6 rounded-xl font-bold text-gray-500 hover:bg-gray-50 transition-all font-sans cursor-pointer"
         >
           Batal
         </button>
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 py-3 px-6 rounded-xl font-bold bg-[#B6F09C] hover:bg-[#a3d98b] text-black transition-all shadow-lg flex items-center justify-center gap-2 font-sans"
+          className="flex-1 py-3 px-6 rounded-xl font-bold bg-[#B6F09C] hover:bg-[#a3d98b] text-black transition-all shadow-lg flex items-center justify-center gap-2 font-sans whitespace-nowrap cursor-pointer"
         >
           {isLoading ? (
             <Loader2 className="animate-spin" size={20} />

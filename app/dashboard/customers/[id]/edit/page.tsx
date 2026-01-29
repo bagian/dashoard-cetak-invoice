@@ -18,7 +18,7 @@ export default async function EditCustomerPage({params}: PageProps) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4">
+    <div className="max-w-7xl mx-auto py-10">
       <h1 className="text-3xl font-black text-[#1C1C1C] font-sans">
         Edit Customer
       </h1>

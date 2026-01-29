@@ -211,7 +211,7 @@ export default function EditProjectForm({project}: {project: Project}) {
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 py-3 px-6 rounded-xl font-bold bg-[#B6F09C] hover:bg-[#a3d98b] text-black transition-all shadow-lg shadow-green-100 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+          className="flex-1 py-3 px-6 rounded-xl font-bold bg-[#B6F09C] hover:bg-[#a3d98b] text-black transition-all shadow-lg shadow-green-100 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer whitespace-nowrap"
         >
           {isLoading ? (
             <Loader2 className="animate-spin" size={20} />
